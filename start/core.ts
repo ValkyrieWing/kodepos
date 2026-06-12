@@ -6,24 +6,33 @@ import type { DataResult } from '../types'
 import { createFullText } from '../app/helpers/kodepos'
 import type { FastifyInstance, FastifyPluginOptions } from 'fastify'
 
+import province from './../data/province.json'
+import city from './../data/city.json'
+
+import district from './../data/district.json'
+
 const load = async (app: FastifyInstance, _: FastifyPluginOptions) => {
   const text = await fs.readFile(path.resolve('data/kodepos.json'), { encoding: 'utf-8' })
   const json: DataResult[] = JSON.parse(text)
-  const data = json.map((item) => ({ ...item, fulltext: createFullText(item) }))
 
-  const fuse = new Fuse(data, {
-    keys: ['fulltext'],
-    includeScore: true,
-    threshold: 0.1,
-    shouldSort: true,
-    ignoreLocation: true,
-    useExtendedSearch: true,
-  })
-
-  app.decorate('fuse', fuse)
-  app.decorate('data', json)
-
+  app.decorate('district', district)
   routes(app)
 }
 
 export default load
+
+export const fuseCity = new Fuse(city, {
+  keys: ['provinceKey'],
+  includeScore: true,
+  threshold: 0,
+  shouldSort: true,
+  ignoreLocation: false,
+  useExtendedSearch: false,
+})
+export const fuseDistrict = new Fuse(district as any, {
+  keys: ['cityKey'],
+  threshold: 0,
+  shouldSort: true,
+  ignoreLocation: false,
+  useExtendedSearch: false,
+})

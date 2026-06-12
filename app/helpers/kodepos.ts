@@ -38,11 +38,12 @@ export const nearestDetection = (
   let nearest: DataResult | null = null
   let smallestDistance = Infinity
 
-  data.forEach((item) => {
+  data.forEach((c) => {
+    const item = c['origin']
     const distance = haversineDistance(lat, lon, item.latitude, item.longitude)
 
     if (distance < smallestDistance) {
-      nearest = item
+      nearest = c
       smallestDistance = distance
       nearest.distance = distance
     }

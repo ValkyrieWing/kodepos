@@ -3,6 +3,7 @@ export type SearchQueries = {
   province?: string
   regency?: string
   district?: string
+  city?: string
 }
 
 export type DetectQueries = {

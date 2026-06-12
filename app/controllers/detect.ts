@@ -16,7 +16,7 @@ export const detect = (app: FastifyInstance) => {
       return sendBadRequest(reply, "The 'latitude' and 'longitude' parameters is required.")
     }
 
-    const result = nearestDetection(app.data, latitude, longitude)
+    const result = nearestDetection(app['district'], latitude, longitude)
 
     if (!result) {
       return sendNotFound(reply)

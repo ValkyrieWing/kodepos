@@ -51,7 +51,7 @@ const app = async () => {
       }
     }
 
-    const address = await app.listen({ host: '0.0.0.0', port: Number(process.env.PORT || 3000) })
+    const address = await app.listen({ host: '0.0.0.0', port: Number(process.env.PORT || 4008) })
 
     console.info(`Listen to requests on ${address}`)
     console.info(`Test here: ${address}/search?q=danasari`)
