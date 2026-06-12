@@ -23,7 +23,7 @@ export default load
 
 export const fuseCity = new Fuse(city, {
   keys: ['provinceKey'],
-  includeScore: true,
+  includeScore: false,
   threshold: 0,
   shouldSort: true,
   ignoreLocation: false,
@@ -35,4 +35,5 @@ export const fuseDistrict = new Fuse(district as any, {
   shouldSort: true,
   ignoreLocation: false,
   useExtendedSearch: false,
+  includeScore: false,
 })
